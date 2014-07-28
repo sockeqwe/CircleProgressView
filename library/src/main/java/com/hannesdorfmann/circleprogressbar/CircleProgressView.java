@@ -55,4 +55,9 @@ public class CircleProgressView extends View {
   protected boolean verifyDrawable(Drawable who) {
     return who == mDrawable || super.verifyDrawable(who);
   }
+
+
+  public void setColor(int color){
+    mDrawable.setColor(color);
+  }
 }

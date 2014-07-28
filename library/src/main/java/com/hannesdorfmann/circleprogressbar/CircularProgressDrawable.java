@@ -11,7 +11,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.util.Property;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
@@ -80,6 +79,11 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     if (mModeAppearing) {
       mCurrentGlobalAngleOffset = (mCurrentGlobalAngleOffset + MIN_SWEEP_ANGLE * 2) % 360;
     }
+  }
+
+  public void setColor(int color){
+    mPaint.setColor(color);
+    invalidateSelf();
   }
 
   @Override

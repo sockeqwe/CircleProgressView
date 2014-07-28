@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">sample</string>
+    <string name="app_name">CircleProgessView</string>
+    <string name="title_activity_color_picker">ColorPicker</string>
     <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_color">ColorActivity</string>
 
 </resources>
