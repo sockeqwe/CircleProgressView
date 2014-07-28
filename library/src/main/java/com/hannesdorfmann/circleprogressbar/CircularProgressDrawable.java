@@ -91,43 +91,30 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     fBounds.bottom = bounds.bottom - mBorderWidth / 2f - .5f;
   }
 
-  //////////////////////////////////////////////////////////////////////////////
-  ////////////////            Animation
+  public void setAngle(float value) {
+    setCurrentGlobalAngle(value);
+  }
 
-  private Property<CircularProgressDrawable, Float> mAngleProperty =
-      new Property<CircularProgressDrawable, Float>(Float.class, "angle") {
-        @Override
-        public Float get(CircularProgressDrawable object) {
-          return object.getCurrentGlobalAngle();
-        }
+  public float getAngle() {
+    return getCurrentGlobalAngle();
+  }
 
-        @Override
-        public void set(CircularProgressDrawable object, Float value) {
-          object.setCurrentGlobalAngle(value);
-        }
-      };
+  public void setArc(float value) {
+    setCurrentSweepAngle(value);
+  }
 
-  private Property<CircularProgressDrawable, Float> mSweepProperty =
-      new Property<CircularProgressDrawable, Float>(Float.class, "arc") {
-        @Override
-        public Float get(CircularProgressDrawable object) {
-          return object.getCurrentSweepAngle();
-        }
-
-        @Override
-        public void set(CircularProgressDrawable object, Float value) {
-          object.setCurrentSweepAngle(value);
-        }
-      };
+  public float getArc() {
+    return getCurrentSweepAngle();
+  }
 
   private void setupAnimations() {
-    mObjectAnimatorAngle = ObjectAnimator.ofFloat(this, mAngleProperty, 360f);
+    mObjectAnimatorAngle = ObjectAnimator.ofFloat(this, "angle", 360f);
     mObjectAnimatorAngle.setInterpolator(ANGLE_INTERPOLATOR);
     mObjectAnimatorAngle.setDuration(ANGLE_ANIMATOR_DURATION);
     mObjectAnimatorAngle.setRepeatMode(ValueAnimator.RESTART);
     mObjectAnimatorAngle.setRepeatCount(ValueAnimator.INFINITE);
 
-    mObjectAnimatorSweep = ObjectAnimator.ofFloat(this, mSweepProperty, 360f - MIN_SWEEP_ANGLE * 2);
+    mObjectAnimatorSweep = ObjectAnimator.ofFloat(this, "arc", 360f - MIN_SWEEP_ANGLE * 2);
     mObjectAnimatorSweep.setInterpolator(SWEEP_INTERPOLATOR);
     mObjectAnimatorSweep.setDuration(SWEEP_ANIMATOR_DURATION);
     mObjectAnimatorSweep.setRepeatMode(ValueAnimator.RESTART);
