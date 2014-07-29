@@ -19,8 +19,8 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
 
   private static final Interpolator ANGLE_INTERPOLATOR = new LinearInterpolator();
   private static final Interpolator SWEEP_INTERPOLATOR = new DecelerateInterpolator();
-  private static final int ANGLE_ANIMATOR_DURATION = 2000;
-  private static final int SWEEP_ANIMATOR_DURATION = 600;
+  private int angleAnimatorDuration = 2000;
+  private int sweepAnimatorDuration = 600;
   private static final int MIN_SWEEP_ANGLE = 30;
   private final RectF fBounds = new RectF();
 
@@ -31,19 +31,39 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   private float mCurrentGlobalAngleOffset;
   private float mCurrentGlobalAngle;
   private float mCurrentSweepAngle;
-  private float mBorderWidth;
+  private float mStrokeWidth;
   private boolean mRunning;
 
-  public CircularProgressDrawable(int color, float borderWidth) {
-    mBorderWidth = borderWidth;
-
+  public CircularProgressDrawable(int color, float strokeWidth) {
+    mStrokeWidth = strokeWidth;
     mPaint = new Paint();
     mPaint.setAntiAlias(true);
     mPaint.setStyle(Paint.Style.STROKE);
-    mPaint.setStrokeWidth(borderWidth);
     mPaint.setColor(color);
 
     setupAnimations();
+  }
+
+  /**
+   * Set the duration of the circle. How long should it take to draw a whole rotation of 360°
+   * @param durationMs The duration in milliseconds
+   */
+  public void setCircleAnimationDuration(int durationMs){
+    this.angleAnimatorDuration = durationMs;
+  }
+
+  /**
+   * The duration of the "sweep" part
+   * @param durationMs duration in milliseconds
+   */
+  public void setSweepAnimationDuration(int durationMs){
+    this.sweepAnimatorDuration = durationMs;
+  }
+
+  public void setStrokeWidth(float strokeWidth){
+    mStrokeWidth = strokeWidth;
+    mPaint.setStrokeWidth(strokeWidth);
+    invalidateSelf();
   }
 
   @Override
@@ -89,10 +109,10 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   @Override
   protected void onBoundsChange(Rect bounds) {
     super.onBoundsChange(bounds);
-    fBounds.left = bounds.left + mBorderWidth / 2f + .5f;
-    fBounds.right = bounds.right - mBorderWidth / 2f - .5f;
-    fBounds.top = bounds.top + mBorderWidth / 2f + .5f;
-    fBounds.bottom = bounds.bottom - mBorderWidth / 2f - .5f;
+    fBounds.left = bounds.left + mStrokeWidth / 2f + .5f;
+    fBounds.right = bounds.right - mStrokeWidth / 2f - .5f;
+    fBounds.top = bounds.top + mStrokeWidth / 2f + .5f;
+    fBounds.bottom = bounds.bottom - mStrokeWidth / 2f - .5f;
   }
 
   public void setAngle(float value) {
@@ -114,13 +134,13 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   private void setupAnimations() {
     mObjectAnimatorAngle = ObjectAnimator.ofFloat(this, "angle", 360f);
     mObjectAnimatorAngle.setInterpolator(ANGLE_INTERPOLATOR);
-    mObjectAnimatorAngle.setDuration(ANGLE_ANIMATOR_DURATION);
+    mObjectAnimatorAngle.setDuration(angleAnimatorDuration);
     mObjectAnimatorAngle.setRepeatMode(ValueAnimator.RESTART);
     mObjectAnimatorAngle.setRepeatCount(ValueAnimator.INFINITE);
 
     mObjectAnimatorSweep = ObjectAnimator.ofFloat(this, "arc", 360f - MIN_SWEEP_ANGLE * 2);
     mObjectAnimatorSweep.setInterpolator(SWEEP_INTERPOLATOR);
-    mObjectAnimatorSweep.setDuration(SWEEP_ANIMATOR_DURATION);
+    mObjectAnimatorSweep.setDuration(sweepAnimatorDuration);
     mObjectAnimatorSweep.setRepeatMode(ValueAnimator.RESTART);
     mObjectAnimatorSweep.setRepeatCount(ValueAnimator.INFINITE);
     mObjectAnimatorSweep.addListener(new Animator.AnimatorListener() {

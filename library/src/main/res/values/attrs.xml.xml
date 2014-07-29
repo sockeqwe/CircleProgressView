@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <declare-styleable name="CircleProgressView">
+    <attr name="color" format="color|reference" />
+    <attr name="strokeWidth" format="dimension|reference" />
+    <attr name="colors" format="reference" />
+    <attr name="circleAnimDurration" format="integer|reference" />
+    <attr name="sweepAnimDurration" format="integer|reference" />
+
+  </declare-styleable>
+
+</resources>
