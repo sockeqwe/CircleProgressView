@@ -6,7 +6,7 @@ It's a progressbar UI component that looks similar to the android L progress bar
 ## Dependency
 
 ```
-compile 'com.hannesdorfmann:circleprogress:1.0.0
+compile 'com.hannesdorfmann:circleprogress:1.0.0'
 ```
 
 ## Usage
