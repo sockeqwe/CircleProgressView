@@ -2,11 +2,10 @@
 <resources>
 
   <declare-styleable name="CircleProgressView">
-    <attr name="color" format="color|reference" />
-    <attr name="strokeWidth" format="dimension|reference" />
-    <attr name="colors" format="reference" />
-    <attr name="circleAnimDurration" format="integer|reference" />
-    <attr name="sweepAnimDurration" format="integer|reference" />
+    <attr name="cpvColor" format="color|reference" />
+    <attr name="cpvStrokeWidth" format="dimension|reference" />
+    <attr name="cpvCircleAnimDuration" format="integer|reference" />
+    <attr name="cpvSweepAnimDuration" format="integer|reference" />
 
   </declare-styleable>
 

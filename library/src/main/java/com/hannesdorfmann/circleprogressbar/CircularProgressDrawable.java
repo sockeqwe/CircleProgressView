@@ -34,13 +34,22 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   private float mStrokeWidth;
   private boolean mRunning;
 
-  public CircularProgressDrawable(int color, float strokeWidth) {
+  /**
+   *
+   * @param color The color
+   * @param strokeWidth The stroke width
+   * @param circleAnimDuration How long does it take to draw a whole rotation of 360°
+   * @param sweepAnimatorDuration How long does the sweep animation takes on the tail
+   */
+  public CircularProgressDrawable(int color, float strokeWidth, int circleAnimDuration, int sweepAnimatorDuration) {
     mStrokeWidth = strokeWidth;
     mPaint = new Paint();
     mPaint.setAntiAlias(true);
     mPaint.setStyle(Paint.Style.STROKE);
     mPaint.setColor(color);
     mPaint.setStrokeWidth(strokeWidth);
+    setCircleAnimationDuration(circleAnimDuration);
+    setSweepAnimationDuration(sweepAnimatorDuration);
 
     setupAnimations();
   }
@@ -54,7 +63,7 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   }
 
   /**
-   * The duration of the "sweep" part
+   * The duration of the "sweep" part (tail)
    * @param durationMs duration in milliseconds
    */
   public void setSweepAnimationDuration(int durationMs){
