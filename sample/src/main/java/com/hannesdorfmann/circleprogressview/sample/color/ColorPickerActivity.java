@@ -1,4 +1,4 @@
-package com.hannesdorfmann.circleprogressbar.sample.color;
+package com.hannesdorfmann.circleprogressview.sample.color;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,39 +8,38 @@ import android.view.MenuItem;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.hannesdorfmann.circleprogressbar.CircleProgressView;
-import com.hannesdorfmann.circleprogressbar.sample.R;
+import com.hannesdorfmann.circleprogressview.sample.R;
+import com.larswerkman.holocolorpicker.ColorPicker;
 
-public class ColorActivity extends Activity {
+public class ColorPickerActivity extends Activity {
 
-  static final int REQ_PICKER = 42;
+  public static final String COLOR = "color";
 
-  @InjectView(R.id.circleProgressView) CircleProgressView progressView;
+  @InjectView(R.id.picker)
+  ColorPicker picker;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_color);
+    setContentView(R.layout.activity_color_picker);
     ButterKnife.inject(this);
   }
 
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == REQ_PICKER && resultCode == RESULT_OK){
-      int color = data.getIntExtra(ColorPickerActivity.COLOR, 0);
-        progressView.setColor(color);
-    }
+  @OnClick(R.id.pickButton)
+  public void onPickClicked(){
+    Intent data = new Intent();
+    data.putExtra(COLOR, picker.getColor());
+    setResult(Activity.RESULT_OK, data);
+    finish();
   }
 
-  @OnClick(R.id.changeColorButton)
-  public void pickColorClicked(){
-    startActivityForResult(new Intent(this, ColorPickerActivity.class), REQ_PICKER);
-  }
+
+
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.color, menu);
+    getMenuInflater().inflate(R.menu.color_picker, menu);
     return true;
   }
 

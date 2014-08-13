@@ -5,7 +5,7 @@ android {
   buildToolsVersion "20.0.0"
 
   defaultConfig {
-    applicationId "com.hannesdorfmann.circleprogressbar.sample"
+    applicationId "com.hannesdorfmann.circleprogressview.sample"
     minSdkVersion 14
     targetSdkVersion 19
     versionCode 1

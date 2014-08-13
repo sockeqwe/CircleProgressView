@@ -1,10 +1,10 @@
-package com.hannesdorfmann.circleprogressbar.sample.xml;
+package com.hannesdorfmann.circleprogressview.sample.xml;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.hannesdorfmann.circleprogressbar.sample.R;
+import com.hannesdorfmann.circleprogressview.sample.R;
 
 public class XmlLayoutActivity extends Activity {
 

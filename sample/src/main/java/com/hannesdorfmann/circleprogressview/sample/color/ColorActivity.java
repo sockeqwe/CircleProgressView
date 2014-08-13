@@ -1,4 +1,4 @@
-package com.hannesdorfmann.circleprogressbar.sample.color;
+package com.hannesdorfmann.circleprogressview.sample.color;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,38 +8,39 @@ import android.view.MenuItem;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.hannesdorfmann.circleprogressbar.sample.R;
-import com.larswerkman.holocolorpicker.ColorPicker;
+import com.hannesdorfmann.CircleProgressView;
+import com.hannesdorfmann.circleprogressview.sample.R;
 
-public class ColorPickerActivity extends Activity {
+public class ColorActivity extends Activity {
 
-  public static final String COLOR = "color";
+  static final int REQ_PICKER = 42;
 
-  @InjectView(R.id.picker)
-  ColorPicker picker;
+  @InjectView(R.id.circleProgressView) CircleProgressView progressView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_color_picker);
+    setContentView(R.layout.activity_color);
     ButterKnife.inject(this);
   }
 
-  @OnClick(R.id.pickButton)
-  public void onPickClicked(){
-    Intent data = new Intent();
-    data.putExtra(COLOR, picker.getColor());
-    setResult(Activity.RESULT_OK, data);
-    finish();
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == REQ_PICKER && resultCode == RESULT_OK){
+      int color = data.getIntExtra(ColorPickerActivity.COLOR, 0);
+        progressView.setColor(color);
+    }
   }
 
-
-
+  @OnClick(R.id.changeColorButton)
+  public void pickColorClicked(){
+    startActivityForResult(new Intent(this, ColorPickerActivity.class), REQ_PICKER);
+  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.color_picker, menu);
+    getMenuInflater().inflate(R.menu.color, menu);
     return true;
   }
 

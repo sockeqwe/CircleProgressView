@@ -8,7 +8,7 @@ It's a progressbar UI component that looks similar to the android L progress bar
 ## Dependency
 
 ```
-compile 'com.hannesdorfmann:circleprogress:1.0.0'
+compile 'com.hannesdorfmann:circleprogressview:1.0.0'
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ In XML:
       xmlns:app="http://schemas.android.com/apk/res-auto"
       >
 
-    <com.hannesdorfmann.circleprogressbar.CircleProgressView
+    <com.hannesdorfmann.CircleProgressView
         android:layout_width="60dp"
         android:layout_height="60dp"
         

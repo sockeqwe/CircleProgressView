@@ -1,13 +1,13 @@
-package com.hannesdorfmann.circleprogressbar.sample;
+package com.hannesdorfmann.circleprogressview.sample;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.hannesdorfmann.circleprogressbar.sample.color.ColorActivity;
-import com.hannesdorfmann.circleprogressbar.sample.theme.ThemeActivity;
-import com.hannesdorfmann.circleprogressbar.sample.xml.XmlLayoutActivity;
+import com.hannesdorfmann.circleprogressview.sample.color.ColorActivity;
+import com.hannesdorfmann.circleprogressview.sample.theme.ThemeActivity;
+import com.hannesdorfmann.circleprogressview.sample.xml.XmlLayoutActivity;
 
 public class MainActivity extends Activity {
 

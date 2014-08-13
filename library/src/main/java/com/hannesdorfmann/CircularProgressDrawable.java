@@ -1,4 +1,4 @@
-package com.hannesdorfmann.circleprogressbar;
+package com.hannesdorfmann;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

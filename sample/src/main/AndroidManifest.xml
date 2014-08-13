@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hannesdorfmann.circleprogressbar.sample" >
+    package="com.hannesdorfmann.circleprogressview.sample" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.hannesdorfmann.circleprogressview.sample.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,19 +17,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".color.ColorPickerActivity"
+            android:name="com.hannesdorfmann.circleprogressview.sample.color.ColorPickerActivity"
             android:label="@string/title_activity_color_picker" >
         </activity>
         <activity
-            android:name=".color.ColorActivity"
+            android:name="com.hannesdorfmann.circleprogressview.sample.color.ColorActivity"
             android:label="@string/title_activity_color" >
         </activity>
         <activity
-            android:name=".xml.XmlLayoutActivity"
+            android:name="com.hannesdorfmann.circleprogressview.sample.xml.XmlLayoutActivity"
             android:label="@string/title_activity_xml_layout" >
         </activity>
         <activity
-            android:name=".theme.ThemeActivity"
+            android:name="com.hannesdorfmann.circleprogressview.sample.theme.ThemeActivity"
             android:label="@string/title_activity_theme"
             android:theme="@style/SpecialTheme">
         </activity>
