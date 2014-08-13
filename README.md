@@ -2,7 +2,7 @@
 
 It's a progressbar UI component that looks similar to the android L progress bar (material design).
 
-![alt text](https://github.com/sockeqwe/CircleProgressView/raw/master/gif/demo.gif "Sample")
+![alt text](https://raw.githubusercontent.com/sockeqwe/CircleProgressBar/master/gif/demo.gif "Sample")
 
 
 ## Dependency
