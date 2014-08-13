@@ -1,4 +1,4 @@
-# CircleProgessBar
+# CircleProgessView
 
 It's a progressbar UI component that looks similar to the android L progress bar (material design).
 
