@@ -28,6 +28,11 @@
             android:name=".xml.XmlLayoutActivity"
             android:label="@string/title_activity_xml_layout" >
         </activity>
+        <activity
+            android:name=".theme.ThemeActivity"
+            android:label="@string/title_activity_theme"
+            android:theme="@style/SpecialTheme">
+        </activity>
     </application>
 
 </manifest>

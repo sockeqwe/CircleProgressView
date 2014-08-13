@@ -8,5 +8,6 @@
     <string name="title_activity_color">ColorActivity</string>
     <string name="title_activity_progress_bar">ProgressBarActivity</string>
     <string name="title_activity_xml_layout">XmlLayoutActivity</string>
+    <string name="title_activity_theme">ThemeActivity</string>
 
 </resources>

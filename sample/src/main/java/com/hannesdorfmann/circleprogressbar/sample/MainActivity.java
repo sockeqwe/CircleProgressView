@@ -6,6 +6,7 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.hannesdorfmann.circleprogressbar.sample.color.ColorActivity;
+import com.hannesdorfmann.circleprogressbar.sample.theme.ThemeActivity;
 import com.hannesdorfmann.circleprogressbar.sample.xml.XmlLayoutActivity;
 
 public class MainActivity extends Activity {
@@ -19,7 +20,7 @@ public class MainActivity extends Activity {
 
   @OnClick(R.id.showThemed)
   public void onStyledThemeClicked() {
-
+    startActivity(new Intent(this, ThemeActivity.class));
   }
 
   @OnClick(R.id.showXmlStyled)
@@ -29,7 +30,6 @@ public class MainActivity extends Activity {
 
   @OnClick(R.id.showDyanmic)
   public void onStyledDynamicClicked() {
-
     startActivity(new Intent(this, ColorActivity.class));
   }
 

@@ -5,4 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+  <style name="SpecialTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+    <item name="cpvColor">#12AAFF</item>
+    <item name="cpvStrokeWidth">3dp</item>
+  </style>
+
 </resources>
