@@ -22,3 +22,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+
+
+apply from: 'https://raw.github.com/sockeqwe/gradle-mvn-push/master/gradle-mvn-push.gradle'
