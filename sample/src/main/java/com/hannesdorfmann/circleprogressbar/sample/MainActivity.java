@@ -6,6 +6,7 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.hannesdorfmann.circleprogressbar.sample.color.ColorActivity;
+import com.hannesdorfmann.circleprogressbar.sample.xml.XmlLayoutActivity;
 
 public class MainActivity extends Activity {
 
@@ -23,7 +24,7 @@ public class MainActivity extends Activity {
 
   @OnClick(R.id.showXmlStyled)
   public void onStyledXmlClicked() {
-
+    startActivity(new Intent(this, XmlLayoutActivity.class));
   }
 
   @OnClick(R.id.showDyanmic)

@@ -50,7 +50,7 @@ public class CircleProgressView extends View {
 
     a.recycle();
 
-    mDrawable = new CircularProgressDrawable(Color.LTGRAY, strokeSize, circleAnimDuration,
+    mDrawable = new CircularProgressDrawable(color, strokeSize, circleAnimDuration,
         sweepAnimDuration);
 
     mDrawable.setCallback(this);
@@ -111,7 +111,7 @@ public class CircleProgressView extends View {
     ss.color = mDrawable.getColor();
     ss.sweepAnimDuration = mDrawable.getSweepAnimationDuration();
     ss.circleAnimDuration = mDrawable.getCircleAnimationDuration();
-    ss.strokeSize = mDrawable.getStrokeSize();
+    ss.strokeSize = mDrawable.getStrokeWidth();
 
     return ss;
   }

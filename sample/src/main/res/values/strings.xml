@@ -7,5 +7,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_color">ColorActivity</string>
     <string name="title_activity_progress_bar">ProgressBarActivity</string>
+    <string name="title_activity_xml_layout">XmlLayoutActivity</string>
 
 </resources>

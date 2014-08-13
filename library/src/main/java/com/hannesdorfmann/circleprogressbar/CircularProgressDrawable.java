@@ -229,7 +229,7 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     return sweepAnimatorDuration;
   }
 
-  public float getStrokeSize() {
+  public float getStrokeWidth() {
     return mStrokeWidth;
   }
 
