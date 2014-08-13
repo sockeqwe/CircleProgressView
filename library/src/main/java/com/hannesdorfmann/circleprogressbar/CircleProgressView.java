@@ -25,7 +25,7 @@ public class CircleProgressView extends View {
   public CircleProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
 
-    mDrawable = new CircularProgressDrawable(Color.RED, 10);
+    mDrawable = new CircularProgressDrawable(Color.RED, 80);
     mDrawable.setCallback(this);
   }
 
@@ -56,8 +56,13 @@ public class CircleProgressView extends View {
     return who == mDrawable || super.verifyDrawable(who);
   }
 
-
-  public void setColor(int color){
+  public void setColor(int color) {
     mDrawable.setColor(color);
+  }
+
+  @Override
+  protected void onDetachedFromWindow() {
+    super.onDetachedFromWindow();
+    mDrawable.stop();
   }
 }

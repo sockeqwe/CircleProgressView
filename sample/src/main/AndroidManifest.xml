@@ -24,6 +24,7 @@
             android:name=".color.ColorActivity"
             android:label="@string/title_activity_color" >
         </activity>
+
     </application>
 
 </manifest>
