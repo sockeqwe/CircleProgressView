@@ -2,6 +2,8 @@
 
 It's a progressbar UI component that looks similar to the android L progress bar (material design).
 
+![alt text](https://github.com/sockeqwe/CircleProgressView/raw/master/gif/demo.gif "Sample")
+
 
 ## Dependency
 
@@ -23,7 +25,6 @@ In XML:
         android:layout_width="60dp"
         android:layout_height="60dp"
         
-        <!-- Optional options -->
         app:cpvColor="@color/blue"
         app:cpvCircleAnimDuration="4000"
         app:cpvSweepAnimDuration="800"
