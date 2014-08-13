@@ -220,4 +220,20 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   public float getCurrentSweepAngle() {
     return mCurrentSweepAngle;
   }
+
+  public int getCircleAnimationDuration() {
+    return angleAnimatorDuration;
+  }
+
+  public int getSweepAnimationDuration() {
+    return sweepAnimatorDuration;
+  }
+
+  public float getStrokeSize() {
+    return mStrokeWidth;
+  }
+
+  public int getColor(){
+    return mPaint.getColor();
+  }
 }

@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -90,9 +92,86 @@ public class CircleProgressView extends View {
     mDrawable.setColor(color);
   }
 
+
   @Override
   protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
     mDrawable.stop();
   }
+
+
+  @Override
+  public Parcelable onSaveInstanceState() {
+    //begin boilerplate code that allows parent classes to save state
+    Parcelable superState = super.onSaveInstanceState();
+
+    SavedState ss = new SavedState(superState);
+    //end
+
+    ss.color = mDrawable.getColor();
+    ss.sweepAnimDuration = mDrawable.getSweepAnimationDuration();
+    ss.circleAnimDuration = mDrawable.getCircleAnimationDuration();
+    ss.strokeSize = mDrawable.getStrokeSize();
+
+    return ss;
+  }
+
+  @Override
+  public void onRestoreInstanceState(Parcelable state) {
+    //begin boilerplate code so parent classes can restore state
+    if(!(state instanceof SavedState)) {
+      super.onRestoreInstanceState(state);
+      return;
+    }
+
+    SavedState ss = (SavedState)state;
+    super.onRestoreInstanceState(ss.getSuperState());
+    //end
+
+    mDrawable.setCircleAnimationDuration(ss.circleAnimDuration);
+    mDrawable.setSweepAnimationDuration(ss.sweepAnimDuration);
+    mDrawable.setColor(ss.color);
+    mDrawable.setStrokeWidth(ss.strokeSize);
+  }
+
+
+  static class SavedState extends BaseSavedState {
+    int color;
+    float strokeSize;
+    int circleAnimDuration;
+    int sweepAnimDuration;
+
+    SavedState(Parcelable superState) {
+      super(superState);
+    }
+
+    private SavedState(Parcel in) {
+      super(in);
+      this.color = in.readInt();
+      this.strokeSize = in.readFloat();
+      this.circleAnimDuration = in.readInt();
+      this.sweepAnimDuration = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+      super.writeToParcel(out, flags);
+      out.writeInt(this.color);
+      out.writeFloat(this.strokeSize);
+      out.writeInt(this.circleAnimDuration);
+      out.writeInt(this.sweepAnimDuration);
+    }
+
+    //required field that makes Parcelables from a Parcel
+    public static final Parcelable.Creator<SavedState> CREATOR =
+        new Parcelable.Creator<SavedState>() {
+          public SavedState createFromParcel(Parcel in) {
+            return new SavedState(in);
+          }
+          public SavedState[] newArray(int size) {
+            return new SavedState[size];
+          }
+        };
+  }
+
 }
