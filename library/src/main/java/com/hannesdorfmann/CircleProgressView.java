@@ -65,6 +65,11 @@ public class CircleProgressView extends View {
   @Override
   protected void onVisibilityChanged(View changedView, int visibility) {
     super.onVisibilityChanged(changedView, visibility);
+
+    if (mDrawable == null){
+      return;
+    }
+
     if (visibility == VISIBLE) {
       mDrawable.start();
     } else {
