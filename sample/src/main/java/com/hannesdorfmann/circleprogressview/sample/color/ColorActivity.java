@@ -28,7 +28,7 @@ public class ColorActivity extends Activity {
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == REQ_PICKER && resultCode == RESULT_OK){
       int color = data.getIntExtra(ColorPickerActivity.COLOR, 0);
-        progressView.setColor(color);
+       // progressView.setColor(color);
     }
   }
 

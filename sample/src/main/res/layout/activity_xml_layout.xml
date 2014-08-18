@@ -28,9 +28,8 @@
     <com.hannesdorfmann.CircleProgressView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:cpvColor="@color/green"
-        app:cpvCircleAnimDuration="4000"
-        app:cpvSweepAnimDuration="800"
+        app:cpvColors="@array/pocket_background_colors"
+        app:cpvSpeed="1.2"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         />

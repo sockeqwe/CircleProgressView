@@ -36,8 +36,10 @@ public class CircleProgressView extends View {
 
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CircleProgressView);
 
-    // The color size
     int color = a.getColor(R.styleable.CircleProgressView_cpvColor, Color.LTGRAY);
+
+    // The colors
+    int colorsId = a.getResourceId(R.styleable.CircleProgressView_cpvColors, 0);
 
     // The stroke size
     int strokeSize =
@@ -49,10 +51,27 @@ public class CircleProgressView extends View {
     // How long should it take to sweep the tail
     int sweepAnimDuration = a.getInt(R.styleable.CircleProgressView_cpvSweepAnimDuration, 600);
 
+    float speed = a.getFloat(R.styleable.CircleProgressView_cpvSpeed, 1.0f);
+
+
+    int minSweepAngle = a.getInteger(R.styleable.CircleProgressView_cpvMinSweepAngle, 20);
+    int maxSweepAngle = a.getInteger(R.styleable.CircleProgressView_cpvMaxSweepAngle, 300);
+
     a.recycle();
 
-    mDrawable = new CircularProgressDrawable(color, strokeSize, circleAnimDuration,
-        sweepAnimDuration);
+
+    int[] colors = null;
+    if (colorsId != 0) {
+      colors = context.getResources().getIntArray(colorsId);
+    }
+
+    if (colors == null){
+      colors = new int[1];
+      colors[0] = color;
+    }
+
+    mDrawable = new CircularProgressDrawable(colors, (float)strokeSize, speed, minSweepAngle, maxSweepAngle,
+        CircularProgressDrawable.Style.ROUNDED);
 
     mDrawable.setCallback(this);
   }
@@ -94,10 +113,6 @@ public class CircleProgressView extends View {
     return who == mDrawable || super.verifyDrawable(who);
   }
 
-  public void setColor(int color) {
-    mDrawable.setColor(color);
-  }
-
 
   @Override
   protected void onDetachedFromWindow() {
@@ -106,6 +121,7 @@ public class CircleProgressView extends View {
   }
 
 
+  /*
   @Override
   public Parcelable onSaveInstanceState() {
     //begin boilerplate code that allows parent classes to save state
@@ -140,6 +156,7 @@ public class CircleProgressView extends View {
     mDrawable.setStrokeWidth(ss.strokeSize);
   }
 
+*/
 
   static class SavedState extends BaseSavedState {
     int color;

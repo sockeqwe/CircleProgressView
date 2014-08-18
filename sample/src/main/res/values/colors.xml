@@ -2,4 +2,17 @@
 <resources>
   <color name="red">#ff0000</color>
   <color name="green">#00FF00</color>
+
+
+  <integer-array name="pocket_background_colors">
+    <item>@color/pocket_color_1</item>
+    <item>@color/pocket_color_2</item>
+    <item>@color/pocket_color_3</item>
+    <item>@color/pocket_color_4</item>
+  </integer-array>
+
+  <color name="pocket_color_1">#85edb9</color>
+  <color name="pocket_color_2">#34bdb7</color>
+  <color name="pocket_color_3">#ee4458</color>
+  <color name="pocket_color_4">#fcb74d</color>
 </resources>
