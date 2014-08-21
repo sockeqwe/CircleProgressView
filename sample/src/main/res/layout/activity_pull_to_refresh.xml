@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.hannesdorfmann.circleprogressview.sample.pulltorefresh.PullToRefreshActivity">
+
+  <com.hannesdorfmann.CirclePullToRefreshView
+      android:layout_width="200dp"
+      android:layout_height="200dp"
+      android:id="@+id/circleView"/>
+
+
+  <Button
+      android:id="@+id/resetButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Reset"
+      android:layout_toEndOf="@+id/circleView"
+      android:layout_alignTop="@+id/circleView" android:layout_toRightOf="@+id/circleView"
+      android:layout_marginTop="59dp"/>
+
+  <SeekBar
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/seekBar" android:layout_alignParentBottom="true"
+      android:max="100"
+      />
+
+</RelativeLayout>

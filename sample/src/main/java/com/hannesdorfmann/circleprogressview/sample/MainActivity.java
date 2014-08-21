@@ -6,6 +6,7 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.hannesdorfmann.circleprogressview.sample.color.ColorActivity;
+import com.hannesdorfmann.circleprogressview.sample.pulltorefresh.PullToRefreshActivity;
 import com.hannesdorfmann.circleprogressview.sample.theme.ThemeActivity;
 import com.hannesdorfmann.circleprogressview.sample.xml.XmlLayoutActivity;
 
@@ -31,6 +32,11 @@ public class MainActivity extends Activity {
   @OnClick(R.id.showDyanmic)
   public void onStyledDynamicClicked() {
     startActivity(new Intent(this, ColorActivity.class));
+  }
+
+  @OnClick(R.id.showPullToRefresh)
+  public void onPullToRefreshClicked(){
+    startActivity(new Intent(this, PullToRefreshActivity.class));
   }
 
 
