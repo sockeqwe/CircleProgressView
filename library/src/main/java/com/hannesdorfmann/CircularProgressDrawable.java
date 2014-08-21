@@ -64,6 +64,22 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     setupAnimations();
   }
 
+  public int getMinSweepAngle() {
+    return mMinSweepAngle;
+  }
+
+  public void setMinSweepAngle(int mMinSweepAngle) {
+    this.mMinSweepAngle = mMinSweepAngle;
+  }
+
+  public int getMaxSweepAngle() {
+    return mMaxSweepAngle;
+  }
+
+  public void setMaxSweepAngle(int mMaxSweepAngle) {
+    this.mMaxSweepAngle = mMaxSweepAngle;
+  }
+
   public void setStrokeStyle(Style style){
     mPaint.setStrokeCap(style == Style.ROUNDED ? Paint.Cap.ROUND : Paint.Cap.BUTT);
   }
@@ -82,6 +98,14 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     mCurrentIndexColor = 0;
     mCurrentColor = mColors[0];
     mPaint.setColor(mCurrentColor);
+  }
+
+  public void setSpeed(float speed){
+    mSpeed = speed;
+  }
+
+  public float getSpeed(){
+    return mSpeed;
   }
 
   @Override

@@ -126,26 +126,26 @@ public class CirclePullToRefreshView extends View {
   public void setProgress(float progress) {
 
     float progressMapped = mapPoint(progress, 0f, 1f, 0f, -360f);
-    Log.d("Test", "pro "+progress + " "+progressMapped);
+    Log.d("Test", "pro " + progress + " " + progressMapped);
     mDrawable.setCurrentGlobalAngle(0);
     mDrawable.setCurrentSweepAngle(progressMapped);
 
-    if (progressMapped == -360){
+    if (progressMapped == -360) {
       mDrawable.start();
     } else {
       mDrawable.stop();
     }
   }
 
-  public void startAnimation(){
+  public void startAnimation() {
     mDrawable.start();
   }
 
-  public void stopAnimation(){
+  public void stopAnimation() {
     mDrawable.stop();
   }
 
-  public void reset(){
+  public void reset() {
     stopAnimation();
     mDrawable.reset();
   }
@@ -180,25 +180,50 @@ public class CirclePullToRefreshView extends View {
     return (x - sourceStart) / (sourceEnd - sourceStart) * (targetEnd - targetStart) + targetStart;
   }
 
-
-
-  public CirclePullToRefreshView setStrokeStyle(CircularProgressDrawable.Style style){
+  public CirclePullToRefreshView setStrokeStyle(CircularProgressDrawable.Style style) {
     mDrawable.setStrokeStyle(style);
     return this;
   }
 
-  public CirclePullToRefreshView setStrokeWidth(float strokeWidth){
+  public CirclePullToRefreshView setStrokeWidth(float strokeWidth) {
     mDrawable.setStrokeWidth(strokeWidth);
     return this;
   }
 
-  public float getStrokeWidth(){
+  public float getStrokeWidth() {
     return mDrawable.getStrokeWidth();
   }
 
   public CirclePullToRefreshView setColors(int colors[]) {
     mDrawable.setColors(colors);
     return this;
+  }
+
+  public CirclePullToRefreshView setSpeed(float speed) {
+    mDrawable.setSpeed(speed);
+    return this;
+  }
+
+  public float getSpeed() {
+    return mDrawable.getSpeed();
+  }
+
+  public CirclePullToRefreshView setMinSweepAngle(int minSweepAngle) {
+    mDrawable.setMinSweepAngle(minSweepAngle);
+    return this;
+  }
+
+  public CirclePullToRefreshView setMaxSweepAngle(int maxSweepAngle) {
+    mDrawable.setMaxSweepAngle(maxSweepAngle);
+    return this;
+  }
+
+  public int getMinSweepAngle() {
+    return mDrawable.getMinSweepAngle();
+  }
+
+  public int getMaxSweepAngle() {
+    return mDrawable.getMaxSweepAngle();
   }
 
 
