@@ -30,6 +30,7 @@
         android:layout_height="60dp"
         app:cpvColors="@array/pocket_background_colors"
         app:cpvSpeed="1.2"
+        app:cpvPopOutColor="@color/popout"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         />

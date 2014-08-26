@@ -38,6 +38,8 @@ public class CircleProgressView extends View {
 
     int color = a.getColor(R.styleable.CircleProgressView_cpvColor, Color.LTGRAY);
 
+    int popOutColor = a.getColor(R.styleable.CircleProgressView_cpvPopOutColor, 0);
+
     // The colors
     int colorsId = a.getResourceId(R.styleable.CircleProgressView_cpvColors, 0);
 
@@ -53,26 +55,30 @@ public class CircleProgressView extends View {
 
     float speed = a.getFloat(R.styleable.CircleProgressView_cpvSpeed, 1.0f);
 
-
     int minSweepAngle = a.getInteger(R.styleable.CircleProgressView_cpvMinSweepAngle, 20);
     int maxSweepAngle = a.getInteger(R.styleable.CircleProgressView_cpvMaxSweepAngle, 300);
 
     a.recycle();
-
 
     int[] colors = null;
     if (colorsId != 0) {
       colors = context.getResources().getIntArray(colorsId);
     }
 
-    if (colors == null){
+    if (colors == null) {
       colors = new int[1];
       colors[0] = color;
     }
 
-    mDrawable = new CircularProgressDrawable(colors, (float)strokeSize, speed, minSweepAngle, maxSweepAngle,
-        CircularProgressDrawable.Style.ROUNDED);
-
+    if (popOutColor == 0) {
+      // No Popout
+      mDrawable = new CircularProgressDrawable(colors, (float) strokeSize, speed, minSweepAngle,
+          maxSweepAngle, CircularProgressDrawable.Style.ROUNDED);
+    } else {
+      // Use PopOut
+      mDrawable = new PopOutCircularProgressDrawable(popOutColor, colors, (float) strokeSize, speed,
+          minSweepAngle, maxSweepAngle, CircularProgressDrawable.Style.ROUNDED);
+    }
     mDrawable.setCallback(this);
   }
 
@@ -85,7 +91,7 @@ public class CircleProgressView extends View {
   protected void onVisibilityChanged(View changedView, int visibility) {
     super.onVisibilityChanged(changedView, visibility);
 
-    if (mDrawable == null){
+    if (mDrawable == null) {
       return;
     }
 
@@ -112,7 +118,6 @@ public class CircleProgressView extends View {
   protected boolean verifyDrawable(Drawable who) {
     return who == mDrawable || super.verifyDrawable(who);
   }
-
 
   @Override
   protected void onDetachedFromWindow() {
@@ -191,10 +196,10 @@ public class CircleProgressView extends View {
           public SavedState createFromParcel(Parcel in) {
             return new SavedState(in);
           }
+
           public SavedState[] newArray(int size) {
             return new SavedState[size];
           }
         };
   }
-
 }

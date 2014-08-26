@@ -10,6 +10,7 @@
     <attr name="cpvSpeed" format="float" />
     <attr name="cpvMinSweepAngle" format="integer"/>
     <attr name="cpvMaxSweepAngle" format="integer"/>
+    <attr name="cpvPopOutColor" format="color|reference"/>
 
   </declare-styleable>
 

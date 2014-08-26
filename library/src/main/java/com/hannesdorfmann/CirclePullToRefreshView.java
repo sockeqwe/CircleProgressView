@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import com.hannesdorfmann.circleprogressview.R;
 
@@ -125,16 +124,7 @@ public class CirclePullToRefreshView extends View {
    */
   public void setProgress(float progress) {
 
-    float progressMapped = mapPoint(progress, 0f, 1f, 0f, -360f);
-    Log.d("Test", "pro " + progress + " " + progressMapped);
-    mDrawable.setCurrentGlobalAngle(0);
-    mDrawable.setCurrentSweepAngle(progressMapped);
-
-    if (progressMapped == -360) {
-      mDrawable.start();
-    } else {
-      mDrawable.stop();
-    }
+    mDrawable.setProgress(progress);
   }
 
   public void startAnimation() {
@@ -150,35 +140,6 @@ public class CirclePullToRefreshView extends View {
     mDrawable.reset();
   }
 
-  /**
-   * This method maps a number x, which is in the range [sourceStart,
-   * sourceEnd], to a new range [targetStart, targetEnd]
-   *
-   * <p>
-   * sourceStart <= x <= sourceEnd <br/>
-   * targetStart <= returnValue <= targetEnd
-   * </p>
-   *
-   * @param x The value that should be mapped
-   * @param sourceStart The source range start (inclusive)
-   * @param sourceEnd The source range end (inclusive)
-   * @param targetStart The target range start (inclusive)
-   * @param targetEnd The target range end (inclusive)
-   * @return The corresponding value of x in the target range
-   */
-  public static float mapPoint(float x, float sourceStart, float sourceEnd, float targetStart,
-      float targetEnd) {
-
-    if (x <= sourceStart) {
-      return targetStart;
-    }
-
-    if (x >= sourceEnd) {
-      return targetEnd;
-    }
-
-    return (x - sourceStart) / (sourceEnd - sourceStart) * (targetEnd - targetStart) + targetStart;
-  }
 
   public CirclePullToRefreshView setStrokeStyle(CircularProgressDrawable.Style style) {
     mDrawable.setStrokeStyle(style);

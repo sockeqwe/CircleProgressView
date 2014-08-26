@@ -24,8 +24,8 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   private static final ArgbEvaluator COLOR_EVALUATOR = new ArgbEvaluator();
   private static final Interpolator ANGLE_INTERPOLATOR = new LinearInterpolator();
   private static final Interpolator SWEEP_INTERPOLATOR = new DecelerateInterpolator();
-  private static final int ANGLE_ANIMATOR_DURATION = 2000;
-  private static final int SWEEP_ANIMATOR_DURATION = 600;
+  protected static final int ANGLE_ANIMATOR_DURATION = 2000;
+  protected static final int SWEEP_ANIMATOR_DURATION = 600;
   private final RectF fBounds = new RectF();
 
   private ObjectAnimator mObjectAnimatorSweepAppearing;
@@ -331,5 +331,47 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     mCurrentIndexColor = 0;
     mPaint.setColor(mColors[0]);
     invalidateSelf();
+  }
+
+  public void setProgress(float progress){
+    float progressMapped = mapPoint(progress, 0f, 1f, 0f, -360f);
+    setCurrentGlobalAngle(0);
+    setCurrentSweepAngle(progressMapped);
+
+    if (progressMapped == -360) {
+      start();
+    } else {
+      stop();
+    }
+  }
+
+  /**
+   * This method maps a number x, which is in the range [sourceStart,
+   * sourceEnd], to a new range [targetStart, targetEnd]
+   *
+   * <p>
+   * sourceStart <= x <= sourceEnd <br/>
+   * targetStart <= returnValue <= targetEnd
+   * </p>
+   *
+   * @param x The value that should be mapped
+   * @param sourceStart The source range start (inclusive)
+   * @param sourceEnd The source range end (inclusive)
+   * @param targetStart The target range start (inclusive)
+   * @param targetEnd The target range end (inclusive)
+   * @return The corresponding value of x in the target range
+   */
+  protected float mapPoint(float x, float sourceStart, float sourceEnd, float targetStart,
+      float targetEnd) {
+
+    if (x <= sourceStart) {
+      return targetStart;
+    }
+
+    if (x >= sourceEnd) {
+      return targetEnd;
+    }
+
+    return (x - sourceStart) / (sourceEnd - sourceStart) * (targetEnd - targetStart) + targetStart;
   }
 }

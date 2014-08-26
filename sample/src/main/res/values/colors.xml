@@ -11,6 +11,7 @@
     <item>@color/pocket_color_4</item>
   </integer-array>
 
+  <color name="popout">#fcb74d</color>
   <color name="pocket_color_1">#85edb9</color>
   <color name="pocket_color_2">#34bdb7</color>
   <color name="pocket_color_3">#ee4458</color>
