@@ -26,6 +26,7 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   private ObjectAnimator mHidePopOutAnimator;
   private float mProgress = 0f;
   private int mHidePopOutProgress = 255;
+  private boolean mPopOutComplete = false;
 
   private Paint mPaint = new Paint();
 
@@ -70,6 +71,7 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   @Override
   public void reset() {
     super.reset();
+    mPopOutComplete = false;
     mCurrentRadius = 0;
     mPaint.setAlpha(255);
     mPaint.setColor(mPopOutColor);
@@ -85,10 +87,6 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
       @Override public void onAnimationCancel(Animator animation) {
         reset();
       }
-
-      @Override public void onAnimationEnd(Animator animation) {
-        startCircleAndPopHiding();
-      }
     });
 
     mShowPopOutAnimator.start();
@@ -97,7 +95,6 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   @Override
   public void draw(Canvas canvas) {
     super.draw(canvas);
-    // TODO use drawCircle?
     canvas.drawCircle(mCircleCenterX, mCircleCenterY, mCurrentRadius, mPaint);
   }
 
@@ -105,6 +102,10 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   public void setProgress(float progress) {
     mProgress = progress;
     mCurrentRadius = mapPoint(progress, 0, 1, 0, mTargetRadius);
+    if (progress == 1f){
+      mPopOutComplete = true;
+      startCircleAndPopHiding();
+    }
     invalidateSelf();
   }
 
@@ -137,7 +138,11 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
 
   @Override
   public void start() {
-    startPopOutAnimation();
+    if (!mPopOutComplete) {
+      startPopOutAnimation();
+    } else {
+      startCircleAndPopHiding();
+    }
   }
 
   @Override
