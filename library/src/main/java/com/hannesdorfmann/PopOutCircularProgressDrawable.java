@@ -7,13 +7,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 /**
  * @author Hannes Dorfmann
  */
 public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
 
-  private static float POPOUT_SHOW_DURATION = 8000;
+  private static float POPOUT_SHOW_DURATION = 600;
   private static float POPOUT_HIDE_DURATION = ANGLE_ANIMATOR_DURATION;
 
   private boolean mPopOut = true;
@@ -101,10 +102,11 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   @Override
   public void setProgress(float progress) {
     mProgress = progress;
+
+    Log.d("Test", "progress "+progress);
     mCurrentRadius = mapPoint(progress, 0, 1, 0, mTargetRadius);
     if (progress == 1f){
       mPopOutComplete = true;
-      startCircleAndPopHiding();
     }
     invalidateSelf();
   }
@@ -124,6 +126,7 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   }
 
   protected void startCircleAndPopHiding() {
+    Log.d("Test", "startCircleAndPopHiding");
     super.start();
     mHidePopOutAnimator = ObjectAnimator.ofInt(this, "hidePopOut", Color.alpha(mPopOutColor), 0)
         .setDuration((int) (POPOUT_HIDE_DURATION / getSpeed() + 0.5f));

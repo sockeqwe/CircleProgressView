@@ -34,15 +34,17 @@ public class CirclePullToRefreshView extends View {
 
   private void init(Context context, AttributeSet attrs, int defStyleAttr) {
 
+    // TODO default styling
+
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CircleProgressView);
 
     int color = a.getColor(R.styleable.CircleProgressView_cpvColor, Color.LTGRAY);
 
     // The colors
-    int colorsId = a.getResourceId(R.styleable.CircleProgressView_cpvColors, Color.LTGRAY);
+    int colorsId = a.getResourceId(R.styleable.CircleProgressView_cpvColors, 0);
 
 
-    int popOutColor = a.getColor(R.styleable.CircleProgressView_cpvPopOutColor, 0);
+    int popOutColor = a.getColor(R.styleable.CircleProgressView_cpvPopOutColor, Color.LTGRAY);
 
     // The stroke size
     int strokeSize =
