@@ -43,7 +43,6 @@ public class CirclePullToRefreshView extends View {
     // The colors
     int colorsId = a.getResourceId(R.styleable.CircleProgressView_cpvColors, 0);
 
-
     int popOutColor = a.getColor(R.styleable.CircleProgressView_cpvPopOutColor, Color.LTGRAY);
 
     // The stroke size
@@ -73,10 +72,8 @@ public class CirclePullToRefreshView extends View {
       colors[0] = color;
     }
 
-    mDrawable = new PopOutCircularProgressDrawable(popOutColor, colors, (float) strokeSize, speed, minSweepAngle,
-        maxSweepAngle, CircularProgressDrawable.Style.ROUNDED);
-
-    mDrawable.setCallback(this);
+    setDrawable(new PopOutCircularProgressDrawable(popOutColor, colors, (float) strokeSize, speed,
+        minSweepAngle, maxSweepAngle, CircularProgressDrawable.Style.ROUNDED));
   }
 
   public int dpToPx(Context context, int dp) {
@@ -144,7 +141,6 @@ public class CirclePullToRefreshView extends View {
     mDrawable.reset();
   }
 
-
   public CirclePullToRefreshView setStrokeStyle(CircularProgressDrawable.Style style) {
     mDrawable.setStrokeStyle(style);
     return this;
@@ -162,6 +158,16 @@ public class CirclePullToRefreshView extends View {
   public CirclePullToRefreshView setColors(int colors[]) {
     mDrawable.setColors(colors);
     return this;
+  }
+
+  public CirclePullToRefreshView setDrawable(CircularProgressDrawable drawable) {
+    mDrawable = drawable;
+    mDrawable.setCallback(this);
+    return this;
+  }
+
+  public CircularProgressDrawable getDrawable(){
+    return mDrawable;
   }
 
   public CirclePullToRefreshView setSpeed(float speed) {

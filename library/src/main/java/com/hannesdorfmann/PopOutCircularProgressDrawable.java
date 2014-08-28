@@ -52,6 +52,7 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   }
 
   public PopOutCircularProgressDrawable setPopOutColor(int color) {
+    mPopOutColor = color;
     mPaint.setColor(color);
     return this;
   }
@@ -103,9 +104,9 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   public void setProgress(float progress) {
     mProgress = progress;
 
-    Log.d("Test", "progress "+progress);
+    Log.d("Test", "progress " + progress);
     mCurrentRadius = mapPoint(progress, 0, 1, 0, mTargetRadius);
-    if (progress == 1f){
+    if (progress == 1f) {
       mPopOutComplete = true;
     }
     invalidateSelf();
