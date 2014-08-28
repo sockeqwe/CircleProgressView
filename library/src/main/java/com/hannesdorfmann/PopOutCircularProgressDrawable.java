@@ -14,8 +14,9 @@ import android.util.Log;
  */
 public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
 
-  private static float POPOUT_SHOW_DURATION = 600;
-  private static float POPOUT_HIDE_DURATION = ANGLE_ANIMATOR_DURATION;
+  // TODO make private and final
+  public static float POPOUT_SHOW_DURATION = 850;
+  public static float POPOUT_HIDE_DURATION = ANGLE_ANIMATOR_DURATION;
 
   private boolean mPopOut = true;
   private int mPopOutColor;
@@ -32,20 +33,25 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   private Paint mPaint = new Paint();
 
   public PopOutCircularProgressDrawable(int popOutColor, int[] colors, float strokeWidth,
-      float speed, int minSweepAngle, int maxSweepAngle, Style style) {
+      float popOutStrokeWidth, float speed, int minSweepAngle, int maxSweepAngle, Style style) {
 
     super(colors, strokeWidth, speed, minSweepAngle, maxSweepAngle, style);
     mPopOutColor = popOutColor;
 
     mPaint.setAntiAlias(true);
     mPaint.setStyle(Paint.Style.STROKE);
-    mPaint.setStrokeWidth(strokeWidth);
+    mPaint.setStrokeWidth(popOutStrokeWidth);
     mPaint.setColor(mPopOutColor);
+
+    int diff = (int) ((popOutStrokeWidth - strokeWidth) / 2 + 0.5f);
+
+    setCirclePadding(diff, diff, diff, diff);
   }
 
   @Override
   protected void onBoundsChange(Rect bounds) {
     super.onBoundsChange(bounds);
+
     mCircleCenterX = bounds.exactCenterX();
     mCircleCenterY = bounds.exactCenterY();
     mTargetRadius = (bounds.height() - mPaint.getStrokeWidth()) / 2;
@@ -84,10 +90,15 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
 
     mShowPopOutAnimator = ObjectAnimator.ofFloat(this, "progress", 0f, 1f)
         .setDuration((int) (POPOUT_SHOW_DURATION / getSpeed() + 0.5));
+    //mShowPopOutAnimator.setInterpolator(new DecelerateInterpolator());
 
     mShowPopOutAnimator.addListener(new AnimatorListenerAdapter() {
       @Override public void onAnimationCancel(Animator animation) {
         reset();
+      }
+
+      @Override public void onAnimationEnd(Animator animation) {
+        startCircleAndPopHiding();
       }
     });
 

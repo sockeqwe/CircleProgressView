@@ -39,6 +39,7 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   private boolean mRunning;
   private int mCurrentIndexColor;
   private int mCurrentColor;
+  private Rect mCirclePadding = new Rect(0, 0, 0, 0);
 
   //params
   private float mStrokeWidth;
@@ -80,31 +81,46 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     this.mMaxSweepAngle = mMaxSweepAngle;
   }
 
-  public void setStrokeStyle(Style style){
+  public void setStrokeStyle(Style style) {
     mPaint.setStrokeCap(style == Style.ROUNDED ? Paint.Cap.ROUND : Paint.Cap.BUTT);
   }
 
-  public void setStrokeWidth(float strokeWidth){
+  /**
+   * Set the addition circle padding. It's the space between the edge of the drawable (canvas) and
+   * the circle that will be drawn
+   */
+  public void setCirclePadding(int left, int top, int right, int bottom) {
+    mCirclePadding.left = left;
+    mCirclePadding.top = top;
+    mCirclePadding.right = right;
+    mCirclePadding.bottom = bottom;
+  }
+
+  public Rect getCirclePadding() {
+    return mCirclePadding;
+  }
+
+  public void setStrokeWidth(float strokeWidth) {
     mStrokeWidth = strokeWidth;
     mPaint.setStrokeWidth(strokeWidth);
   }
 
-  public float getStrokeWidth(){
+  public float getStrokeWidth() {
     return mStrokeWidth;
   }
 
-  public void setColors(int colors[]){
+  public void setColors(int colors[]) {
     mColors = colors;
     mCurrentIndexColor = 0;
     mCurrentColor = mColors[0];
     mPaint.setColor(mCurrentColor);
   }
 
-  public void setSpeed(float speed){
+  public void setSpeed(float speed) {
     mSpeed = speed;
   }
 
-  public float getSpeed(){
+  public float getSpeed() {
     return mSpeed;
   }
 
@@ -117,7 +133,8 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
       //      sweepAngle = 360 - sweepAngle - mMinSweepAngle;
     } else {
       //      sweepAngle += mMinSweepAngle;
-    };
+    }
+    ;
 
     startAngle %= 360;
 
@@ -142,10 +159,10 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
   @Override
   protected void onBoundsChange(Rect bounds) {
     super.onBoundsChange(bounds);
-    fBounds.left = bounds.left + mStrokeWidth / 2f + .5f;
-    fBounds.right = bounds.right - mStrokeWidth / 2f - .5f;
-    fBounds.top = bounds.top + mStrokeWidth / 2f + .5f;
-    fBounds.bottom = bounds.bottom - mStrokeWidth / 2f - .5f;
+    fBounds.left = bounds.left + mStrokeWidth / 2f + .5f + mCirclePadding.left;
+    fBounds.right = bounds.right - mStrokeWidth / 2f - .5f - mCirclePadding.right;
+    fBounds.top = bounds.top + mStrokeWidth / 2f + .5f + mCirclePadding.top;
+    fBounds.bottom = bounds.bottom - mStrokeWidth / 2f - .5f - mCirclePadding.bottom;
   }
 
   private void setAppearing() {
@@ -322,8 +339,7 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     return mCurrentSweepAngle;
   }
 
-
-  public void reset(){
+  public void reset() {
     mCurrentColor = 0;
     mCurrentGlobalAngleOffset = 0;
     mCurrentGlobalAngle = 0;
@@ -333,7 +349,7 @@ public class CircularProgressDrawable extends Drawable implements Animatable {
     invalidateSelf();
   }
 
-  public void setProgress(float progress){
+  public void setProgress(float progress) {
     float progressMapped = mapPoint(progress, 0f, 1f, 0f, -360f);
     setCurrentGlobalAngle(0);
     setCurrentSweepAngle(progressMapped);

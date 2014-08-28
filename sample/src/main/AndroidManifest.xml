@@ -37,6 +37,10 @@
             android:name=".pulltorefresh.PullToRefreshActivity"
             android:label="@string/title_activity_pull_to_refresh" >
         </activity>
+        <activity
+            android:name=".popout.PopOutActivity"
+            android:label="@string/title_activity_pop_out" >
+        </activity>
     </application>
 
 </manifest>

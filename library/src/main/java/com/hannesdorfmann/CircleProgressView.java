@@ -45,7 +45,12 @@ public class CircleProgressView extends View {
 
     // The stroke size
     int strokeSize =
-        a.getDimensionPixelSize(R.styleable.CircleProgressView_cpvStrokeWidth, dpToPx(context, 6));
+        a.getDimensionPixelSize(R.styleable.CircleProgressView_cpvStrokeWidth, dpToPx(context, 5));
+
+    // popOut stroke width
+    int popOutStrokeWidth =
+        a.getDimensionPixelSize(R.styleable.CircleProgressView_cpvPopOutStrokeWidth,
+            dpToPx(context, 7));
 
     // How long should it take to make a complete circle
     int circleAnimDuration = a.getInt(R.styleable.CircleProgressView_cpvCircleAnimDuration, 2000);
@@ -76,8 +81,9 @@ public class CircleProgressView extends View {
           maxSweepAngle, CircularProgressDrawable.Style.ROUNDED);
     } else {
       // Use PopOut
-      mDrawable = new PopOutCircularProgressDrawable(popOutColor, colors, (float) strokeSize, speed,
-          minSweepAngle, maxSweepAngle, CircularProgressDrawable.Style.ROUNDED);
+      mDrawable = new PopOutCircularProgressDrawable(popOutColor, colors, (float) strokeSize,
+          popOutStrokeWidth, speed, minSweepAngle, maxSweepAngle,
+          CircularProgressDrawable.Style.ROUNDED);
     }
     mDrawable.setCallback(this);
   }
