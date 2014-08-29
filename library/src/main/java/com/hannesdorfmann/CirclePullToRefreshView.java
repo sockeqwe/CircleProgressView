@@ -78,7 +78,7 @@ public class CirclePullToRefreshView extends View {
     }
 
     setDrawable(new PopOutCircularProgressDrawable(popOutColor, colors, (float) strokeSize,
-        popOutStrokeWidth, speed, minSweepAngle, maxSweepAngle,
+        popOutStrokeWidth, speed, minSweepAngle, maxSweepAngle, true,
         CircularProgressDrawable.Style.ROUNDED));
   }
 

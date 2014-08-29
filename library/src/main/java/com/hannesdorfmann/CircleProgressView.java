@@ -82,7 +82,7 @@ public class CircleProgressView extends View {
     } else {
       // Use PopOut
       mDrawable = new PopOutCircularProgressDrawable(popOutColor, colors, (float) strokeSize,
-          popOutStrokeWidth, speed, minSweepAngle, maxSweepAngle,
+          popOutStrokeWidth, speed, minSweepAngle, maxSweepAngle, true,
           CircularProgressDrawable.Style.ROUNDED);
     }
     mDrawable.setCallback(this);

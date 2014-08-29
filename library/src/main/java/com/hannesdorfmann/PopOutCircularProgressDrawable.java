@@ -7,7 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 /**
  * @author Hannes Dorfmann
@@ -15,7 +15,7 @@ import android.util.Log;
 public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
 
   // TODO make private and final
-  public static float POPOUT_SHOW_DURATION = 850;
+  public static float POPOUT_SHOW_DURATION = 800;
   public static float POPOUT_HIDE_DURATION = ANGLE_ANIMATOR_DURATION;
 
   private boolean mPopOut = true;
@@ -29,15 +29,17 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   private float mProgress = 0f;
   private int mHidePopOutProgress = 255;
   private boolean mPopOutComplete = false;
-
+  private boolean mPopOutFading = true;
+  private boolean mOriginalPopOutFading;
   private Paint mPaint = new Paint();
 
   public PopOutCircularProgressDrawable(int popOutColor, int[] colors, float strokeWidth,
-      float popOutStrokeWidth, float speed, int minSweepAngle, int maxSweepAngle, Style style) {
+      float popOutStrokeWidth, float speed, int minSweepAngle, int maxSweepAngle,  boolean popOutFading, Style style) {
 
     super(colors, strokeWidth, speed, minSweepAngle, maxSweepAngle, style);
     mPopOutColor = popOutColor;
-
+    mPopOutFading = popOutFading;
+    mOriginalPopOutFading = popOutFading;
     mPaint.setAntiAlias(true);
     mPaint.setStyle(Paint.Style.STROKE);
     mPaint.setStrokeWidth(popOutStrokeWidth);
@@ -83,14 +85,16 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
     mCurrentRadius = 0;
     mPaint.setAlpha(255);
     mPaint.setColor(mPopOutColor);
+    mPopOutFading = mOriginalPopOutFading;
   }
+
 
   private void startPopOutAnimation() {
     stop();
 
     mShowPopOutAnimator = ObjectAnimator.ofFloat(this, "progress", 0f, 1f)
         .setDuration((int) (POPOUT_SHOW_DURATION / getSpeed() + 0.5));
-    //mShowPopOutAnimator.setInterpolator(new DecelerateInterpolator());
+    mShowPopOutAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
 
     mShowPopOutAnimator.addListener(new AnimatorListenerAdapter() {
       @Override public void onAnimationCancel(Animator animation) {
@@ -115,7 +119,15 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   public void setProgress(float progress) {
     mProgress = progress;
 
-    Log.d("Test", "progress " + progress);
+    if (mPopOutFading){
+      int targetAlpha = Color.alpha(mPopOutColor);
+      int currentAlpha = (int) (mapPoint(progress, 0, 0.85f, targetAlpha / 10, targetAlpha) + 0.5);
+      mPaint.setAlpha(currentAlpha);
+      if (currentAlpha >= targetAlpha){
+        mPopOutFading = false;
+      }
+    }
+
     mCurrentRadius = mapPoint(progress, 0, 1, 0, mTargetRadius);
     if (progress == 1f) {
       mPopOutComplete = true;
@@ -138,7 +150,6 @@ public class PopOutCircularProgressDrawable extends CircularProgressDrawable {
   }
 
   protected void startCircleAndPopHiding() {
-    Log.d("Test", "startCircleAndPopHiding");
     super.start();
     mHidePopOutAnimator = ObjectAnimator.ofInt(this, "hidePopOut", Color.alpha(mPopOutColor), 0)
         .setDuration((int) (POPOUT_HIDE_DURATION / getSpeed() + 0.5f));
